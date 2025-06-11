@@ -65,7 +65,7 @@
       detail: localStorage.getItem("detail") || "상세 없음"
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbyN2XVyw7y3-YTqe6xbcrrrPTv5fE-T6Qtaic0pALspE-MgBCD3Uge-2eay3hmJJBYw/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbz52RPR41CJOYU0Y_begwfBkiKLM82Cg9a4TM0eq6lcaQcKP0dHDfL3hO3_E8qhNa2_/exec", {
       method: "POST",
       body: JSON.stringify(postData),
       headers: { "Content-Type": "application/json" }
@@ -75,7 +75,7 @@
 
     function goHome() {
       localStorage.clear();
-      location.href = 'index.html';
+      location.href = 'snubh.html';
     }
   </script>
 </body>
