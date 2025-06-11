@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>환자 정보 입력</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      padding: 50px;
+      background-color: #f0f8ff;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    input {
+      width: 90%;
+      font-size: 28px;
+      padding: 18px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      height: 60px;
+    }
+    button {
+      font-size: 28px;
+      padding: 18px 30px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #2b90d9;
+      color: white;
+      cursor: pointer;
+    }
+    #keyboard {
+      max-width: 700px;
+      margin: auto;
+      margin-top: 20px;
+    }
+  </style>
+  
+<script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+<script src="https://unpkg.com/hangul-js@0.2.6/hangul.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css" />
+
+</head>
+<body>
+  <div class="container">
+    <h2>환자 정보 입력</h2>
+    <input type="text" id="name" placeholder="이름" readonly onclick="focusField('name')"/>
+    <input type="text" id="idNumber" placeholder="주민등록번호 앞 6자리" readonly onclick="focusField('idNumber')" />
+    <input type="text" id="phone" placeholder="전화번호" readonly onclick="focusField('phone')" />
+    <button onclick="saveAndNext()">다음</button>
+    <div id="keyboard"></div>
+  </div>
+  <script>
+    let currentField = 'name';
+    let buffer = [];
+
+    function focusField(fieldId) {
+      currentField = fieldId;
+      buffer = Hangul.disassemble(document.getElementById(currentField).value);
+    }
+
+    function saveAndNext() {
+      const name = document.getElementById('name').value;
+      const idNumber = document.getElementById('idNumber').value;
+      const phone = document.getElementById('phone').value;
+      if (!name || !idNumber || !phone) {
+        alert("모든 정보를 입력해주세요.");
+        return;
+      }
+      localStorage.setItem("name", name);
+      localStorage.setItem("idNumber", idNumber + "-*******");
+      localStorage.setItem("phone", phone);
+      location.href = 'step3.html';
+    }
+
+    const Keyboard = window.SimpleKeyboard.default;
+    const keyboard = new Keyboard({
+      onKeyPress: button => {
+        if (button === "{bksp}") {
+          buffer.pop();
+        } else {
+          buffer.push(button);
+        }
+        const result = Hangul.assemble(buffer);
+        document.getElementById(currentField).value = result;
+      },
+      layout: {
+        default: ["ㄱ ㄴ ㄷ ㄹ ㅁ", "ㅂ ㅅ ㅇ ㅈ ㅊ", "ㅋ ㅌ ㅍ ㅎ ㅏ", "ㅑ ㅓ ㅕ ㅗ ㅛ", "ㅜ ㅠ ㅡ ㅣ {bksp}"]
+      },
+      display: {
+        "{bksp}": "←"
+      }
+    });
+  </script>
+</body>
+</html>
