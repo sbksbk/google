@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>환자 정보 입력</title>
+  <style>
+    body {
+      background-color: #e6f5ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    input {
+      font-size: 20px;
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+    }
+    button {
+      font-size: 20px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      background-color: #2b90d9;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>환자 정보 입력</h2>
+    <p>아래 정보를 입력해 주세요</p>
+    <input type="text" placeholder="이름 (예: 홍길동)"><br>
+    <input type="text" placeholder="주민등록번호 (예: 900101-1234567)"><br>
+    <input type="text" placeholder="전화번호 (예: 01012345678)"><br>
+    <button onclick="location.href='step3.html'">다음</button>
+  </div>
+</body>
+</html>
