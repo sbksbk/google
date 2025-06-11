@@ -44,6 +44,14 @@
     <h2>진료를 어떻게 받으시겠어요?</h2>
     <button onclick="location.href='step7.html'">오늘 진료 대기표 받기</button>
     <button onclick="location.href='step7.html'">내일 진료 예약하기</button>
+    <button onclick="goHome()">처음으로 돌아가기</button>
   </div>
+
+  <script>
+    function goHome() {
+      localStorage.clear();
+      location.href = 'index.html';
+    }
+  </script>
 </body>
 </html>

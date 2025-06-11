@@ -140,6 +140,19 @@
     }
 
     renderSymptoms();
+  
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("symptoms", JSON.stringify(Array.from(selected)));
+    });
+
+    window.addEventListener("load", () => {
+      const saved = JSON.parse(localStorage.getItem("symptoms") || "[]");
+      for (const sym of saved) {
+        selected.add(sym);
+      }
+      renderSelected();
+    });
   </script>
+
 </body>
 </html>

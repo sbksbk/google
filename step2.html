@@ -40,10 +40,31 @@
   <div class="container">
     <h2>환자 정보 입력</h2>
     <p>아래 정보를 입력해 주세요</p>
-    <input type="text" placeholder="이름 (예: 홍길동)"><br>
-    <input type="text" placeholder="주민등록번호 (예: 900101-1234567)"><br>
-    <input type="text" placeholder="전화번호 (예: 01012345678)"><br>
-    <button onclick="location.href='step3.html'">다음</button>
+    <input id="nameInput" type="text" placeholder="이름 (예: 홍길동)"><br>
+    <input id="idInput" type="text" maxlength="6" placeholder="주민등록번호 앞 6자리 (예: 900101)"><br>
+    <input id="phoneInput" type="text" placeholder="전화번호 (예: 01012345678)"><br>
+    <button onclick="saveAndNext()">다음</button>
   </div>
+
+  <script>
+    function saveAndNext() {
+      const name = document.getElementById("nameInput").value;
+      const idFront = document.getElementById("idInput").value;
+      const phone = document.getElementById("phoneInput").value;
+
+      if (idFront.length !== 6) {
+        alert("주민등록번호 앞 6자리를 정확히 입력해 주세요.");
+        return;
+      }
+
+      const maskedId = idFront + "-*******";
+
+      localStorage.setItem("name", name);
+      localStorage.setItem("idNumber", maskedId);
+      localStorage.setItem("phone", phone);
+
+      location.href = 'step3.html';
+    }
+  </script>
 </body>
 </html>

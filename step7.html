@@ -34,6 +34,16 @@
       font-size: 18px;
       margin-top: 20px;
     }
+    .home-btn {
+      margin-top: 30px;
+      font-size: 18px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      background-color: #2b90d9;
+      color: white;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -43,16 +53,16 @@
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=진료예약완료" alt="QR 코드">
     </div>
     <p>위 QR 코드를 데스크에 보여주세요.<br>또는 접수 번호 <strong>109번</strong>을 기억해 주세요.</p>
+    <button class="home-btn" onclick="goHome()">다음 환자 문진 시작하기</button>
   </div>
 
   <script>
-    // 예시: 실제 데이터는 이전 단계에서 localStorage 등을 통해 넘길 수 있음
     const postData = {
       name: localStorage.getItem("name") || "홍길동",
-      idNumber: localStorage.getItem("idNumber") || "900101-1234567",
+      idNumber: localStorage.getItem("idNumber") || "900101-*******",
       phone: localStorage.getItem("phone") || "01012345678",
       symptoms: JSON.parse(localStorage.getItem("symptoms") || "[]"),
-      detail: localStorage.getItem("detail") || "통증이 심함"
+      detail: localStorage.getItem("detail") || "상세 없음"
     };
 
     fetch("https://script.google.com/macros/s/AKfycbyN2XVyw7y3-YTqe6xbcrrrPTv5fE-T6Qtaic0pALspE-MgBCD3Uge-2eay3hmJJBYw/exec", {
@@ -62,6 +72,11 @@
     }).then(response => response.text()).then(text => {
       console.log("저장 결과:", text);
     });
+
+    function goHome() {
+      localStorage.clear();
+      location.href = 'index.html';
+    }
   </script>
 </body>
 </html>
